@@ -30,14 +30,18 @@ versions:
       moduleRef:
         id: vpc
         output: id
+    - name: vpc_name
+      moduleRef:
+        id: vpc
+        output: name
     - name: acl_id
       moduleRef:
         id: vpc
         output: acl_id
-    - name: gateway_ids
+    - name: gateways
       moduleRef:
         id: gateways
-        output: ids
+        output: gateways
       optional: true
     - name: region
       scope: global
