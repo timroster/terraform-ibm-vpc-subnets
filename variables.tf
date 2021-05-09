@@ -19,9 +19,15 @@ variable "vpc_name" {
   description = "The name of the vpc instance"
 }
 
-variable "acl_id" {
+variable "vpc_id" {
   type        = string
-  description = "The id of the network acl for the vpc instance"
+  description = "The id of the vpc instance"
+}
+
+variable "zone_offset" {
+  type        = number
+  description = "The offset for the zone where the subnet should be created. The default offset is 0 which means the first subnet should be created in zone xxx-1"
+  default     = 0
 }
 
 variable "_count" {
@@ -43,7 +49,7 @@ variable "gateways" {
 }
 
 variable "ipv4_cidr_blocks" {
-  type        = list(string)
+  type        = list(object({cidr = string}))
   description = "List of ipv4 cidr blocks for the subnets that will be created (e.g. ['10.10.10.0/24']). If you are providing cidr blocks then a value must be provided for each of the subnets. If you don't provide cidr blocks for each of the subnets then values will be generated using the {ipv4_address_count} value."
   default     = []
 }
@@ -60,9 +66,14 @@ variable "provision" {
   default     = true
 }
 
-
 variable "flow_log_cos_bucket_name" {
   type        = string
   description = "Cloud Object Storage bucket id for flow logs (optional)"
+  default     = ""
+}
+
+variable "auth_id" {
+  type        = string
+  description = "The id of the authorization policy that allows the Flow Log to access the Object Storage bucket. This is optional and provided to sequence the authorization before the flow log creation."
   default     = ""
 }

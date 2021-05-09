@@ -35,10 +35,10 @@ versions:
       moduleRef:
         id: vpc
         output: name
-    - name: acl_id
+    - name: vpc_id
       moduleRef:
         id: vpc
-        output: acl_id
+        output: id
     - name: gateways
       moduleRef:
         id: gateways
